@@ -1,33 +1,50 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
-import "./App.css";
+import { useRef } from "react";
+import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
+
+import Home from "./sections/Home";
+import About from "./sections/About";
+import Dishes from "./sections/Dishes";
+import Contact from "./sections/Contact";
 
 function App() {
-  const [count, setCount] = useState(0);
+  const homeRef = useRef(null);
+  const aboutRef = useRef(null);
+  const dishesRef = useRef(null);
+  const contactRef = useRef(null);
 
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+      <Navbar
+        sections={{
+          home: homeRef,
+          about: aboutRef,
+          dishes: dishesRef,
+          contact: contactRef,
+        }}
+      />
+
+      <div ref={homeRef}>
+        <Home />
       </div>
-      <h1>Hi..... foodara</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
+      <div ref={aboutRef}>
+        <About />
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <div ref={dishesRef}>
+        <Dishes />
+      </div>
+      <div ref={contactRef}>
+        <Contact />
+      </div>
+
+      <Footer
+        sections={{
+          home: homeRef,
+          about: aboutRef,
+          dishes: dishesRef,
+          contact: contactRef,
+        }}
+      />
     </>
   );
 }
