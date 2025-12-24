@@ -1,4 +1,6 @@
 import express from "express";
+import upload from "../middlewares/upload.js";
+
 import {
   getDishes,
   createDish,
@@ -13,7 +15,7 @@ const router = express.Router();
 router.get("/", getDishes);
 
 // Admin
-router.post("/", authMiddleware, createDish);
+router.post("/", authMiddleware, upload.single("image"), createDish);
 router.put("/:id", authMiddleware, updateDish);
 router.delete("/:id", authMiddleware, deleteDish);
 

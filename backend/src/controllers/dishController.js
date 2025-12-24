@@ -18,34 +18,20 @@ export const getDishes = async (req, res) => {
   }
 };
 
-// -------- ADD DISH (ADMIN) --------
 export const createDish = async (req, res) => {
   try {
-    const { name, description, price, category, imageUrl } = req.body;
-
-    if (!name || !price || !category) {
-      return res.status(400).json({
-        message: "Name, price, and category are required",
-      });
-    }
-
+    const { name, price, category } = req.body;
+    const imageUrl = req.file ? `/uploads/${req.file.filename}` : null;
     const dish = await Dish.create({
       name,
-      description,
       price,
       category,
       imageUrl,
     });
 
-    res.status(201).json({
-      message: "Dish created successfully",
-      dish,
-    });
+    res.status(201).json(dish);
   } catch (error) {
-    res.status(500).json({
-      message: "Failed to create dish",
-      error: error.message,
-    });
+    res.status(500).json({ message: "Failed to create dish" });
   }
 };
 

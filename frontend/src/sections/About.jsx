@@ -1,6 +1,29 @@
+import { useEffect, useState } from "react";
 import "./About.css";
 
 const About = () => {
+  const [aboutText, setAboutText] = useState("");
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchAbout = async () => {
+      try {
+        const res = await fetch("http://localhost:5000/api/cms", {
+          cache: "no-store", // avoids caching issues
+        });
+        const data = await res.json();
+
+        setAboutText(data.aboutText || "");
+      } catch (error) {
+        console.error("Failed to load About content", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchAbout();
+  }, []);
+
   return (
     <section className="about">
       <div className="about-container">
@@ -8,22 +31,7 @@ const About = () => {
           About <span>Foodara</span>
         </h2>
 
-        <p>
-          Foodara is a multi-cuisine restaurant dedicated to serving authentic
-          Indian, Italian, and Chinese dishes. We focus on quality ingredients,
-          rich flavors, and a welcoming dining experience.
-        </p>
-
-        <p>
-          Whether you are dining in with family or planning a large catering
-          service, Foodara ensures consistency, taste, and satisfaction in every
-          meal we serve.
-        </p>
-
-        <p>
-          Our chefs bring years of expertise, combining traditional recipes with
-          modern presentation to deliver memorable meals every day.
-        </p>
+        {loading ? <p>Loading...</p> : <p>{aboutText}</p>}
       </div>
     </section>
   );

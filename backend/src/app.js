@@ -26,6 +26,9 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+// ===================IMG UPLOAD ================== //
+app.use("/uploads", express.static("uploads"));
+
 // ================== ROUTE ==================
 app.get("/", (req, res) => {
   res.status(200).json({

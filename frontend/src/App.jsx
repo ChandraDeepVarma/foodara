@@ -1,4 +1,6 @@
 import { useRef } from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 
@@ -7,7 +9,14 @@ import About from "./sections/About";
 import Dishes from "./sections/Dishes";
 import Contact from "./sections/Contact";
 
-function App() {
+// Admin
+import AdminLogin from "./admin/pages/Login.jsx";
+import Dashboard from "./admin/pages/Dashboard.jsx";
+import ProtectedRoute from "./admin/components/ProtectedRoute.jsx";
+
+/* ================= PUBLIC SITE ================= */
+
+function PublicSite() {
   const homeRef = useRef(null);
   const aboutRef = useRef(null);
   const dishesRef = useRef(null);
@@ -46,6 +55,31 @@ function App() {
         }}
       />
     </>
+  );
+}
+
+/* ================= APP ROUTER ================= */
+
+function App() {
+  return (
+    <BrowserRouter>
+      <Routes>
+        {/* Public Website */}
+        <Route path="/" element={<PublicSite />} />
+
+        {/* Admin */}
+        <Route path="/admin/login" element={<AdminLogin />} />
+
+        <Route
+          path="/admin/dashboard"
+          element={
+            <ProtectedRoute>
+              <Dashboard />
+            </ProtectedRoute>
+          }
+        />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
