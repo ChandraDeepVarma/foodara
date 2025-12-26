@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import adminApi from "../services/adminApi";
+import "./login.css";
 
 function Login() {
   const navigate = useNavigate();
@@ -31,11 +32,11 @@ function Login() {
   };
 
   return (
-    <div style={styles.container}>
-      <form onSubmit={handleSubmit} style={styles.form}>
+    <div className="admin-login-container">
+      <form onSubmit={handleSubmit} className="admin-login-form">
         <h2>Admin Login</h2>
 
-        {error && <p style={styles.error}>{error}</p>}
+        {error && <p className="admin-login-error">{error}</p>}
 
         <input
           type="text"
@@ -60,28 +61,5 @@ function Login() {
     </div>
   );
 }
-
-const styles = {
-  container: {
-    minHeight: "100vh",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    background: "#000",
-  },
-  form: {
-    display: "flex",
-    flexDirection: "column",
-    gap: "12px",
-    padding: "30px",
-    background: "#111",
-    color: "#fff",
-    width: "300px",
-  },
-  error: {
-    color: "red",
-    fontSize: "14px",
-  },
-};
 
 export default Login;

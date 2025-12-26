@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import adminApi from "../../services/adminApi";
+import Swal from "sweetalert2";
 import "./DishesCms.css";
 
 function DishesCms() {
@@ -21,27 +22,85 @@ function DishesCms() {
     loadDishes();
   }, []);
 
+  // ===========================
+  // ADD DISH WITH ALERT
+  // ===========================
   const addDish = async () => {
-    const formData = new FormData();
+    if (!form.name || !form.price || !imageFile) {
+      Swal.fire({
+        icon: "warning",
+        title: "Missing details",
+        text: "Please enter name, price and select an image.",
+      });
+      return;
+    }
 
+    const formData = new FormData();
     formData.append("name", form.name);
     formData.append("price", form.price);
     formData.append("category", form.category);
     formData.append("image", imageFile);
 
-    await adminApi.post("/dishes", formData, {
-      headers: { "Content-Type": "multipart/form-data" },
-    });
+    try {
+      await adminApi.post("/dishes", formData, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
 
-    setForm({ name: "", price: "", category: "indian" });
-    setImageFile(null);
+      Swal.fire({
+        icon: "success",
+        title: "Dish added",
+        text: "The dish has been added successfully.",
+        timer: 1500,
+        showConfirmButton: false,
+      });
 
-    loadDishes();
+      setForm({ name: "", price: "", category: "indian" });
+      setImageFile(null);
+      loadDishes();
+    } catch (error) {
+      Swal.fire({
+        icon: "error",
+        title: "Failed",
+        text: "Failed to add dish. Please try again.",
+      });
+    }
   };
 
+  // ===========================
+  // DELETE DISH WITH CONFIRMATION
+  // ===========================
   const deleteDish = async (id) => {
-    await adminApi.delete(`/dishes/${id}`);
-    loadDishes();
+    const result = await Swal.fire({
+      title: "Delete this dish?",
+      text: "This action cannot be undone.",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#e10600",
+      cancelButtonColor: "#555",
+      confirmButtonText: "Yes, delete",
+    });
+
+    if (!result.isConfirmed) return;
+
+    try {
+      await adminApi.delete(`/dishes/${id}`);
+
+      Swal.fire({
+        icon: "success",
+        title: "Deleted",
+        text: "Dish has been deleted.",
+        timer: 1200,
+        showConfirmButton: false,
+      });
+
+      loadDishes();
+    } catch (error) {
+      Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: "Failed to delete dish.",
+      });
+    }
   };
 
   return (
@@ -85,7 +144,7 @@ function DishesCms() {
       {/* DISH LIST */}
       <div className="admin-dishes-list">
         {dishes.map((d) => (
-          <div className="admin-dish-row">
+          <div className="admin-dish-row" key={d.id}>
             <div className="admin-dish-info">
               <img
                 src={`http://localhost:5000${d.imageUrl}`}
@@ -98,7 +157,6 @@ function DishesCms() {
               </div>
             </div>
 
-            {/* CATEGORY */}
             <div className={`admin-dish-category ${d.category}`}>
               {d.category}
             </div>

@@ -20,6 +20,22 @@ function MessagesCms() {
     startIndex + MESSAGES_PER_PAGE
   );
 
+  // Date retreiving logic
+  const formatDateTime = (dateString) => {
+    if (!dateString) return "—";
+
+    const date = new Date(dateString);
+
+    return date.toLocaleString("en-IN", {
+      day: "2-digit",
+      month: "short",
+      year: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: true,
+    });
+  };
+
   return (
     <div className="admin-messages">
       <h2 className="admin-messages-title">Messages</h2>
@@ -41,6 +57,11 @@ function MessagesCms() {
             <div className="admin-message-row">
               <span className="label">Phone</span>
               <span className="value">{m.phone || "N/A"}</span>
+            </div>
+
+            <div className="admin-message-row">
+              <span className="label">Sent At</span>
+              <span className="value">{formatDateTime(m.createdAt)}</span>
             </div>
 
             <div className="admin-message-row message">
