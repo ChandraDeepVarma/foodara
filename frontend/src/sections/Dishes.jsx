@@ -6,6 +6,9 @@ const DishRow = ({ title, dishes }) => {
 
   const scroll = (direction) => {
     const amount = 300;
+
+    if (!scrollRef.current) return;
+
     scrollRef.current.scrollLeft += direction === "left" ? -amount : amount;
   };
 
@@ -23,10 +26,13 @@ const DishRow = ({ title, dishes }) => {
       <div className="dish-scroll" ref={scrollRef}>
         {dishes.map((dish) => (
           <div className="dish-card" key={dish.id}>
-            <img
-              src={`http://localhost:5000${dish.imageUrl}`}
-              alt={dish.name}
-            />
+            <div className="dish-image">
+              <img
+                src={`http://localhost:5000${dish.imageUrl}`}
+                alt={dish.name}
+                loading="lazy"
+              />
+            </div>
 
             <div className="dish-info">
               <p className="dish-name">{dish.name}</p>

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import adminApi from "../../services/adminApi";
+import "./DishesCms.css";
 
 function DishesCms() {
   const [dishes, setDishes] = useState([]);
@@ -9,7 +10,6 @@ function DishesCms() {
     name: "",
     price: "",
     category: "indian",
-    imageUrl: "",
   });
 
   const loadDishes = async () => {
@@ -27,17 +27,12 @@ function DishesCms() {
     formData.append("name", form.name);
     formData.append("price", form.price);
     formData.append("category", form.category);
-
-    // 👇 THIS IS THE MOST IMPORTANT LINE
     formData.append("image", imageFile);
 
     await adminApi.post("/dishes", formData, {
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
+      headers: { "Content-Type": "multipart/form-data" },
     });
 
-    // optional: reset form
     setForm({ name: "", price: "", category: "indian" });
     setImageFile(null);
 
@@ -50,41 +45,73 @@ function DishesCms() {
   };
 
   return (
-    <div>
-      <h2>Dishes</h2>
+    <div className="admin-dishes">
+      <h2 className="admin-dishes-title">Dishes</h2>
 
-      {/* Add dish */}
-      <input
-        placeholder="Name"
-        onChange={(e) => setForm({ ...form, name: e.target.value })}
-      />
-      <input
-        placeholder="Price"
-        onChange={(e) => setForm({ ...form, price: e.target.value })}
-      />
-      <input
-        type="file"
-        accept="image/*"
-        onChange={(e) => setImageFile(e.target.files[0])}
-      />
+      {/* ADD DISH */}
+      <div className="admin-dishes-card">
+        <div className="admin-dishes-form">
+          <input
+            placeholder="Name"
+            value={form.name}
+            onChange={(e) => setForm({ ...form, name: e.target.value })}
+          />
 
-      <select onChange={(e) => setForm({ ...form, category: e.target.value })}>
-        <option value="indian">Indian</option>
-        <option value="italian">Italian</option>
-        <option value="chinese">Chinese</option>
-      </select>
+          <input
+            placeholder="Price"
+            value={form.price}
+            onChange={(e) => setForm({ ...form, price: e.target.value })}
+          />
 
-      <button onClick={addDish}>Add Dish</button>
+          <input
+            type="file"
+            accept="image/*"
+            onChange={(e) => setImageFile(e.target.files[0])}
+          />
 
-      <hr />
+          <select
+            value={form.category}
+            onChange={(e) => setForm({ ...form, category: e.target.value })}
+          >
+            <option value="indian">Indian</option>
+            <option value="italian">Italian</option>
+            <option value="chinese">Chinese</option>
+          </select>
 
-      {/* List */}
-      {dishes.map((d) => (
-        <div key={d.id}>
-          {d.name} - ₹{d.price}
-          <button onClick={() => deleteDish(d.id)}>Delete</button>
+          <button onClick={addDish}>Add Dish</button>
         </div>
-      ))}
+      </div>
+
+      {/* DISH LIST */}
+      <div className="admin-dishes-list">
+        {dishes.map((d) => (
+          <div className="admin-dish-row">
+            <div className="admin-dish-info">
+              <img
+                src={`http://localhost:5000${d.imageUrl}`}
+                alt={d.name}
+                className="admin-dish-image"
+              />
+
+              <div className="admin-dish-text">
+                <strong>{d.name}</strong> – ₹{d.price}
+              </div>
+            </div>
+
+            {/* CATEGORY */}
+            <div className={`admin-dish-category ${d.category}`}>
+              {d.category}
+            </div>
+
+            <button
+              className="admin-dish-delete"
+              onClick={() => deleteDish(d.id)}
+            >
+              Delete
+            </button>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }

@@ -1,0 +1,119 @@
+/* ===========================
+   CONTACT CMS PAGE
+=========================== */
+
+/* Page container */
+.contact-cms {
+  width: 100%;
+}
+
+/* Page title */
+.contact-cms h2 {
+  font-size: 30px;
+  font-weight: 600;
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+/* Card wrapper */
+.contact-card {
+  background: #111;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 14px;
+  padding: 32px;
+  max-width: 900px;
+  margin: 0 auto;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.65);
+}
+
+/* ===========================
+   FIELD LABELS
+=========================== */
+.contact-label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #9ca3af; /* soft gray */
+}
+
+/* Space between fields */
+.contact-field {
+  margin-bottom: 18px;
+}
+
+/* Field group */
+.contact-field {
+  margin-bottom: 18px;
+}
+
+/* Input fields */
+.contact-card input {
+  width: 100%;
+  background: #0b0b0b;
+  border: 1px solid #333;
+  color: #fff;
+  padding: 14px 16px;
+  border-radius: 8px;
+  font-size: 15px;
+  outline: none;
+}
+
+.contact-card input::placeholder {
+  color: #6b7280;
+}
+
+.contact-card input:focus {
+  border-color: #ef4444;
+  box-shadow: 0 0 0 1px rgba(239, 68, 68, 0.5);
+}
+
+/* Button row */
+.contact-actions {
+  display: flex;
+  justify-content: center;
+  margin-top: 24px;
+}
+
+/* Save button */
+/* Button wrapper (align right) */
+.contact-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+}
+
+/* Save button – smaller & cleaner */
+.contact-card button {
+  background: linear-gradient(135deg, #dc2626, #b91c1c);
+  color: #fff;
+  border: none;
+  padding: 10px 20px; /* smaller */
+  border-radius: 8px;
+  font-size: 14px; /* smaller text */
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.contact-card button:hover:not(:disabled) {
+  background: linear-gradient(135deg, #ef4444, #dc2626);
+}
+
+.contact-card button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* ===========================
+   RESPONSIVE
+=========================== */
+@media (max-width: 768px) {
+  .contact-card {
+    padding: 24px;
+  }
+
+  .contact-cms h2 {
+    font-size: 24px;
+  }
+}

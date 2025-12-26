@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import adminApi from "../../services/adminApi";
+import "./aboutCms.css";
 
 function AboutCms() {
   const [aboutText, setAboutText] = useState("");
@@ -38,34 +39,34 @@ function AboutCms() {
   if (loading) return <p>Loading...</p>;
 
   return (
-    <div>
-      <h2>Edit About Section</h2>
+    <div className="admin-container about-page">
+      <div className="admin-header about-header center">
+        <h1>Edit About Section</h1>
+        <p>Update the About content shown on the website</p>
+      </div>
 
-      <textarea
-        value={aboutText}
-        onChange={(e) => setAboutText(e.target.value)}
-        rows={10}
-        style={styles.textarea}
-      />
+      <div className="about-center">
+        <div className="admin-card about-card">
+          <label className="field-label">About Content</label>
 
-      <br />
+          <div className="editor-wrapper">
+            <textarea
+              className="about-textarea"
+              value={aboutText}
+              onChange={(e) => setAboutText(e.target.value)}
+              placeholder="Write about your company here..."
+            />
+          </div>
 
-      <button onClick={handleSave} disabled={saving}>
-        {saving ? "Saving..." : "Save Changes"}
-      </button>
+          <div className="button-row">
+            <button onClick={handleSave} disabled={saving}>
+              {saving ? "Saving..." : "Save Changes"}
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
-
-const styles = {
-  textarea: {
-    width: "100%",
-    marginTop: "10px",
-    padding: "10px",
-    background: "#111",
-    color: "#fff",
-    border: "1px solid #333",
-  },
-};
 
 export default AboutCms;

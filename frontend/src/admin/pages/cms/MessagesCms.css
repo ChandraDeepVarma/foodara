@@ -1,0 +1,105 @@
+/* ===========================
+   ADMIN MESSAGES
+=========================== */
+
+.admin-messages {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+/* Title */
+.admin-messages-title {
+  font-size: 28px;
+  font-weight: 600;
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+/* ===========================
+   MESSAGE LIST
+=========================== */
+.admin-messages-list {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.admin-message-card {
+  background: #0b0b0b;
+  border: 1px solid #222;
+  border-radius: 14px;
+  padding: 18px 22px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+}
+
+/* Row layout */
+.admin-message-row {
+  display: grid;
+  grid-template-columns: 100px 1fr;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+/* Message row (bigger) */
+.admin-message-row.message {
+  margin-top: 8px;
+}
+
+/* Labels */
+.admin-message-row .label {
+  color: #9ca3af;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+/* Values */
+.admin-message-row .value {
+  color: #e5e7eb;
+  font-size: 14px;
+  line-height: 1.6;
+  word-break: break-word;
+}
+
+/* ===========================
+   PAGINATION
+=========================== */
+.admin-pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 28px;
+  gap: 8px;
+}
+
+.admin-pagination button {
+  background: #111;
+  border: 1px solid #333;
+  color: #ccc;
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.admin-pagination button:hover {
+  background: #1c1c1c;
+  color: #fff;
+}
+
+.admin-pagination button.active {
+  background: #e10600;
+  border-color: #e10600;
+  color: #fff;
+}
+
+/* ===========================
+   RESPONSIVE
+=========================== */
+@media (max-width: 600px) {
+  .admin-message-row {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-message-row .label {
+    margin-bottom: 4px;
+  }
+}

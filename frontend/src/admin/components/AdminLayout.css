@@ -1,0 +1,115 @@
+/* ===========================
+   MAIN LAYOUT
+=========================== */
+.admin-layout {
+  display: flex;
+  height: 100vh; /* LOCK layout to viewport */
+  background: #0b0b0b;
+  color: #fff;
+  overflow: hidden; /* PREVENT layout scrolling */
+  margin-top: -70px; /* keep your admin override */
+}
+
+/* ===========================
+   RIGHT SIDE CONTENT (ONLY SCROLL AREA)
+=========================== */
+.admin-main {
+  flex: 1;
+  height: 100vh;
+  padding: 32px;
+  overflow-y: auto; /* ONLY this scrolls */
+}
+
+/* ===========================
+   CONTENT WRAPPER (CENTER HORIZONTALLY)
+=========================== */
+.admin-main > * {
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+/* ===========================
+   PAGE HEADER
+=========================== */
+.admin-header {
+  margin-bottom: 24px;
+}
+
+.admin-header h1 {
+  margin: 0;
+  font-size: 28px;
+}
+
+.admin-header p {
+  margin-top: 6px;
+  color: #aaa;
+  font-size: 14px;
+}
+
+/* ===========================
+   CARD (REUSABLE)
+=========================== */
+.admin-card {
+  background: #111;
+  border: 1px solid #222;
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 24px;
+  width: 100%;
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ===========================
+   FORM ELEMENTS
+=========================== */
+.admin-card input,
+.admin-card textarea,
+.admin-card select {
+  width: 100%;
+  background: #0b0b0b;
+  border: 1px solid #333;
+  color: #fff;
+  padding: 10px;
+  border-radius: 6px;
+  margin-bottom: 12px;
+}
+
+/* ===========================
+   BUTTON
+=========================== */
+.admin-card button {
+  background: #e10600;
+  color: #fff;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.admin-card button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* ===========================
+   LIST ITEMS
+=========================== */
+.admin-list-item {
+  background: #0b0b0b;
+  border: 1px solid #222;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 12px;
+}
+
+/* ===========================
+   RESPONSIVE
+=========================== */
+@media (max-width: 768px) {
+  .admin-main {
+    padding: 20px 14px;
+  }
+}

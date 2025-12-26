@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import adminApi from "../../services/adminApi";
+import "./contactCms.css";
 
 function ContactCms() {
   const [form, setForm] = useState({
@@ -33,34 +34,46 @@ function ContactCms() {
   };
 
   return (
-    <div>
+    <div className="contact-cms">
       <h2>Edit Contact Info</h2>
 
-      <input
-        name="address"
-        value={form.address}
-        onChange={handleChange}
-        placeholder="Address"
-      />
+      <div className="contact-card">
+        <div className="contact-field">
+          <label className="contact-label">Address</label>
+          <input
+            name="address"
+            value={form.address}
+            onChange={handleChange}
+            placeholder="Address"
+          />
+        </div>
 
-      <input
-        name="phone"
-        value={form.phone}
-        onChange={handleChange}
-        placeholder="Phone"
-      />
+        <div className="contact-field">
+          <label className="contact-label">Phone Number</label>
+          <input
+            name="phone"
+            value={form.phone}
+            onChange={handleChange}
+            placeholder="Phone"
+          />
+        </div>
 
-      <input
-        name="email"
-        value={form.email}
-        onChange={handleChange}
-        placeholder="Email"
-      />
+        <div className="contact-field">
+          <label className="contact-label">Email Address</label>
+          <input
+            name="email"
+            value={form.email}
+            onChange={handleChange}
+            placeholder="Email"
+          />
+        </div>
 
-      <br />
-      <button onClick={handleSave} disabled={saving}>
-        Save Changes
-      </button>
+        <div className="contact-actions">
+          <button onClick={handleSave} disabled={saving}>
+            Save Changes
+          </button>
+        </div>
+      </div>
     </div>
   );
 }

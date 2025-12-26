@@ -1,0 +1,180 @@
+/* ===========================
+   ADMIN DISHES CMS
+=========================== */
+
+.admin-dishes {
+  width: 100%;
+}
+
+/* Title */
+.admin-dishes-title {
+  font-size: 30px;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+/* ===========================
+   ADD DISH CARD
+=========================== */
+.admin-dishes-card {
+  background: #111;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 14px;
+  padding: 28px;
+  max-width: 1000px;
+  margin: 0 auto 32px;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.65);
+}
+
+/* Add dish form */
+.admin-dishes-form {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1.5fr 1fr auto;
+  gap: 12px;
+  align-items: center;
+}
+
+.admin-dishes-form input,
+.admin-dishes-form select {
+  background: #0b0b0b;
+  border: 1px solid #333;
+  color: #fff;
+  padding: 12px 14px;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+.admin-dishes-form input::placeholder {
+  color: #6b7280;
+}
+
+.admin-dishes-form input[type="file"] {
+  padding: 9px;
+  font-size: 13px;
+  color: #aaa;
+}
+
+.admin-dishes-form button {
+  background: linear-gradient(135deg, #dc2626, #b91c1c);
+  color: #fff;
+  border: none;
+  padding: 12px 18px;
+  border-radius: 8px;
+  font-size: 14px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.admin-dishes-form button:hover {
+  background: linear-gradient(135deg, #ef4444, #dc2626);
+}
+
+/* ===========================
+   DISH LIST
+=========================== */
+.admin-dishes-list {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.admin-dish-row {
+  display: grid;
+  grid-template-columns: 1fr 140px 100px;
+  align-items: center;
+
+  padding: 18px 22px;
+  margin-bottom: 14px;
+
+  background: #0b0b0b;
+  border: 1px solid #222;
+  border-radius: 12px;
+}
+
+/* Left side */
+.admin-dish-info {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.admin-dish-image {
+  width: 90px;
+  height: 70px;
+  object-fit: cover;
+  border-radius: 10px;
+  border: 1px solid #222;
+  background: #000;
+}
+
+.admin-dish-text {
+  font-size: 16px;
+  font-weight: 500;
+  color: #e5e7eb;
+}
+
+/* ===========================
+   CATEGORY BADGE (MIDDLE)
+=========================== */
+.admin-dish-category {
+  min-width: 120px;
+  text-align: center;
+
+  padding: 6px 14px;
+  border-radius: 20px;
+  margin-right: 50px;
+
+  font-size: 13px;
+  font-weight: 500;
+  text-transform: capitalize;
+
+  color: #fff;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.admin-dish-category.indian {
+  background: rgba(180, 50, 50, 0.25);
+  border-color: rgba(180, 50, 50, 0.45);
+}
+
+.admin-dish-category.italian {
+  background: rgba(34, 139, 34, 0.25);
+  border-color: rgba(34, 139, 34, 0.45);
+}
+
+.admin-dish-category.chinese {
+  background: rgba(184, 134, 11, 0.25);
+  border-color: rgba(184, 134, 11, 0.45);
+}
+
+/* Delete button */
+.admin-dish-delete {
+  background: transparent;
+  border: 1px solid #dc2626;
+  color: #dc2626;
+  padding: 8px 14px;
+  border-radius: 8px;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.admin-dish-delete:hover {
+  background: #dc2626;
+  color: #fff;
+}
+
+/* ===========================
+   RESPONSIVE
+=========================== */
+@media (max-width: 900px) {
+  .admin-dishes-form {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-dish-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+}

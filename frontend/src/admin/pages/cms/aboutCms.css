@@ -1,0 +1,154 @@
+/* ===========================
+   MAIN CONTAINER
+=========================== */
+.admin-container {
+  width: 100%;
+  padding: 32px 48px;
+}
+
+/* About page layout */
+.about-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* ===========================
+   HEADER
+=========================== */
+.admin-header {
+  margin-bottom: 32px;
+}
+
+.admin-header.center {
+  text-align: center;
+}
+
+.admin-header h1 {
+  font-size: 30px;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.admin-header p {
+  color: #9ca3af;
+  font-size: 15px;
+}
+
+/* ===========================
+   CENTER WRAPPER
+=========================== */
+.about-center {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+/* ===========================
+   CARD
+=========================== */
+.admin-card {
+  width: 100%;
+  max-width: 900px; /* KEY: keeps content centered */
+  background: linear-gradient(
+    180deg,
+    rgba(18, 18, 18, 0.95),
+    rgba(8, 8, 8, 0.95)
+  );
+  padding: 32px;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.65);
+}
+
+/* ===========================
+   LABEL
+=========================== */
+.field-label {
+  display: block;
+  margin-bottom: 12px;
+  font-size: 14px;
+  color: #c7c7c7;
+}
+
+/* ===========================
+   EDITOR
+=========================== */
+.editor-wrapper {
+  width: 100%;
+  height: 420px;
+  margin-bottom: 10px;
+}
+
+.about-textarea {
+  width: 100%;
+  height: 80%;
+  padding: 18px 20px;
+  resize: none;
+
+  background: #0b0b0b;
+  color: #ffffff;
+
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+
+  font-size: 16px;
+  line-height: 1.8;
+  outline: none;
+}
+
+.about-textarea::placeholder {
+  color: #6b7280;
+}
+
+.about-textarea:focus {
+  border-color: #ef4444;
+  box-shadow: 0 0 0 1px rgba(239, 68, 68, 0.5);
+}
+
+/* ===========================
+   BUTTON
+=========================== */
+.button-row {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+  margin-top: -50px;
+}
+
+.admin-card button {
+  padding: 12px 28px;
+  background: linear-gradient(135deg, #dc2626, #b91c1c);
+  border: none;
+  color: #ffffff;
+  border-radius: 10px;
+  font-size: 15px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.admin-card button:hover:not(:disabled) {
+  background: linear-gradient(135deg, #ef4444, #dc2626);
+}
+
+.admin-card button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* ===========================
+   RESPONSIVE
+=========================== */
+@media (max-width: 768px) {
+  .admin-container {
+    padding: 24px 16px;
+  }
+
+  .admin-card {
+    padding: 24px;
+  }
+
+  .editor-wrapper {
+    height: 360px;
+  }
+}
