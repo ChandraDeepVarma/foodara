@@ -1,12 +1,24 @@
 import { useNavigate } from "react-router-dom";
+import adminApi from "../services/adminApi";
 import "./Sidebar.css";
 
 function Sidebar({ activeSection, setActiveSection }) {
   const navigate = useNavigate();
 
-  const handleLogout = () => {
-    localStorage.removeItem("adminToken");
-    navigate("/admin/login");
+  const handleLogout = async () => {
+    try {
+      const adminLogId = localStorage.getItem("adminLogId");
+
+      if (adminLogId) {
+        await adminApi.post("/auth/logout", { adminLogId });
+      }
+    } catch (error) {
+      // ignore
+    } finally {
+      localStorage.removeItem("adminToken");
+      localStorage.removeItem("adminLogId");
+      navigate("/admin/login");
+    }
   };
 
   return (
@@ -14,12 +26,7 @@ function Sidebar({ activeSection, setActiveSection }) {
       <h2 className="admin-logo">Foodara</h2>
 
       <nav className="admin-nav">
-        <button
-          className={activeSection === "dashboard" ? "active" : ""}
-          onClick={() => setActiveSection("dashboard")}
-        >
-          Dashboard
-        </button>
+        <button onClick={() => setActiveSection(null)}>Dashboard</button>
 
         <button
           className={activeSection === "about" ? "active" : ""}
@@ -47,6 +54,11 @@ function Sidebar({ activeSection, setActiveSection }) {
           onClick={() => setActiveSection("messages")}
         >
           Messages
+        </button>
+
+        {/* EXPORT ACTION */}
+        <button onClick={() => setActiveSection("export")}>
+          Export Database
         </button>
       </nav>
 

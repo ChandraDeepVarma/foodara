@@ -75,9 +75,15 @@ function DishesCms() {
       text: "This action cannot be undone.",
       icon: "warning",
       showCancelButton: true,
+      background: "#000",
+      color: "#fff",
       confirmButtonColor: "#e10600",
-      cancelButtonColor: "#555",
+      iconColor: "#e10600",
       confirmButtonText: "Yes, delete",
+      customClass: {
+        popup: "foodara-swal-popup",
+        confirmButton: "foodara-swal-button",
+      },
     });
 
     if (!result.isConfirmed) return;

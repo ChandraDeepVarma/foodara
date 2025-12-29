@@ -22,7 +22,12 @@ function Login() {
         password,
       });
 
+      // ✅ STORE JWT TOKEN
       localStorage.setItem("adminToken", res.data.token);
+
+      // ✅ STORE ADMIN LOG ID (THIS WAS MISSING)
+      localStorage.setItem("adminLogId", res.data.adminLogId);
+
       navigate("/admin/dashboard");
     } catch (err) {
       setError("Invalid username or password");

@@ -9,6 +9,7 @@ import setupRoutes from "./routes/setupRoutes.js";
 import cmsRoutes from "./routes/cmsRoutes.js";
 import dishRoutes from "./routes/dishRoutes.js";
 import contactRoutes from "./routes/contactRoutes.js";
+import exportRoutes from "./routes/exportRoutes.js";
 
 // =================models=================
 
@@ -41,6 +42,7 @@ app.use("/api/auth", authRoutes);
 app.use("/api/cms", cmsRoutes);
 app.use("/api/dishes", dishRoutes);
 app.use("/api/contact", contactRoutes);
+app.use("/api/admin", exportRoutes);
 
 // ================== GLOBAL ERROR HANDLER ==================
 app.use((err, req, res, next) => {

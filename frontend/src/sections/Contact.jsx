@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import ReCAPTCHA from "react-google-recaptcha";
+import Swal from "sweetalert2";
 import "./Contact.css";
 
 const Contact = () => {
@@ -16,6 +18,7 @@ const Contact = () => {
   });
 
   const [sending, setSending] = useState(false);
+  const [captchaToken, setCaptchaToken] = useState(null); // ⬅️ NEW
 
   // Fetch contact info (CMS)
   useEffect(() => {
@@ -46,8 +49,16 @@ const Contact = () => {
 
   // Handle submit
   const handleSubmit = async (e) => {
-    e.preventDefault(); // 🔑 stop page reload
+    e.preventDefault();
     setSending(true);
+
+    // ⬇️⬇️ CAPTCHA CHECK (NEW)
+    if (!captchaToken) {
+      alert("Please verify captcha");
+      setSending(false);
+      return;
+    }
+    // ⬆️⬆️ CAPTCHA CHECK END
 
     try {
       const res = await fetch("http://localhost:5000/api/contact", {
@@ -55,22 +66,44 @@ const Contact = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(form),
+        body: JSON.stringify({
+          ...form,
+          captchaToken, // ⬅️ NEW
+        }),
       });
 
       if (!res.ok) throw new Error("Failed");
 
-      alert("Message sent successfully");
+      // ✅ SUCCESS SWEETALERT
+      Swal.fire({
+        icon: "success",
+        title: "Message Sent!",
+        text: "Thank you for reaching out. We’ll get back to you soon.",
+        background: "#000",
+        color: "#fff",
+        confirmButtonColor: "#e10600",
+        iconColor: "#e10600",
+        customClass: {
+          popup: "foodara-swal-popup",
+          confirmButton: "foodara-swal-button",
+        },
+      });
 
-      // reset form
       setForm({
         name: "",
         email: "",
         phone: "",
         message: "",
       });
+
+      setCaptchaToken(null); // ⬅️ NEW (reset captcha)
     } catch (error) {
-      alert("Failed to send message");
+      // ❌ ERROR SWEETALERT
+      Swal.fire({
+        icon: "error",
+        title: "Oops!",
+        text: "Failed to send message. Please try again later.",
+      });
     } finally {
       setSending(false);
     }
@@ -142,7 +175,13 @@ const Contact = () => {
             required
           />
 
-          <button type="submit" disabled={sending}>
+          {/* CAPTCHA */}
+          <ReCAPTCHA
+            sitekey={import.meta.env.VITE_RECAPTCHA_SITE_KEY} // ⬅️ NEW
+            onChange={(token) => setCaptchaToken(token)} // ⬅️ NEW
+          />
+
+          <button type="submit" disabled={sending || !captchaToken}>
             {sending ? "Sending..." : "Send Message"}
           </button>
         </form>
