@@ -10,7 +10,7 @@ import Dishes from "./sections/Dishes";
 import Contact from "./sections/Contact";
 
 // Admin
-import AdminLogin from "./admin/pages/Login.jsx";
+import AdminLogin from "./admin/pages/login.jsx";
 import Dashboard from "./admin/pages/Dashboard.jsx";
 import ProtectedRoute from "./admin/components/ProtectedRoute.jsx";
 
