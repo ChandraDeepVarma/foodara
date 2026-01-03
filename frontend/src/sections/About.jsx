@@ -8,9 +8,12 @@ const About = () => {
   useEffect(() => {
     const fetchAbout = async () => {
       try {
-        const res = await fetch("http://localhost:5000/api/cms", {
-          cache: "no-store", // avoids caching issues
-        });
+        const res = await fetch(
+          `${import.meta.env.VITE_API_BASE_URL}/api/cms`,
+          {
+            cache: "no-store", // avoids caching issues
+          }
+        );
         const data = await res.json();
 
         setAboutText(data.aboutText || "");

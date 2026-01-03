@@ -47,14 +47,17 @@ function Dashboard() {
     });
 
     try {
-      const res = await fetch("http://localhost:5000/api/admin/export-db", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("adminToken")}`,
-        },
-        body: JSON.stringify({ password: pwd.value }),
-      });
+      const res = await fetch(
+        `${import.meta.env.VITE_API_BASE_URL}/api/admin/export-db`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("adminToken")}`,
+          },
+          body: JSON.stringify({ password: pwd.value }),
+        }
+      );
 
       if (!res.ok) throw new Error();
 

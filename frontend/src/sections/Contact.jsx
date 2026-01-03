@@ -24,9 +24,12 @@ const Contact = () => {
   useEffect(() => {
     const fetchContact = async () => {
       try {
-        const res = await fetch("http://localhost:5000/api/cms", {
-          cache: "no-store",
-        });
+        const res = await fetch(
+          `${import.meta.env.VITE_API_BASE_URL}/api/cms`,
+          {
+            cache: "no-store",
+          }
+        );
         const data = await res.json();
 
         setContact({
@@ -61,16 +64,19 @@ const Contact = () => {
     // ⬆️⬆️ CAPTCHA CHECK END
 
     try {
-      const res = await fetch("http://localhost:5000/api/contact", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          ...form,
-          captchaToken, // ⬅️ NEW
-        }),
-      });
+      const res = await fetch(
+        `${import.meta.env.VITE_API_BASE_URL}/api/contact`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            ...form,
+            captchaToken, // ⬅️ NEW
+          }),
+        }
+      );
 
       if (!res.ok) throw new Error("Failed");
 

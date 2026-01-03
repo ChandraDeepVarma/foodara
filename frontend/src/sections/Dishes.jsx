@@ -6,7 +6,6 @@ const DishRow = ({ title, dishes }) => {
 
   const scroll = (direction) => {
     const amount = 300;
-
     if (!scrollRef.current) return;
 
     scrollRef.current.scrollLeft += direction === "left" ? -amount : amount;
@@ -28,7 +27,7 @@ const DishRow = ({ title, dishes }) => {
           <div className="dish-card" key={dish.id}>
             <div className="dish-image">
               <img
-                src={`http://localhost:5000${dish.imageUrl}`}
+                src={`${import.meta.env.VITE_API_BASE_URL}${dish.imageUrl}`}
                 alt={dish.name}
                 loading="lazy"
               />
@@ -49,7 +48,7 @@ const Dishes = () => {
   const [dishes, setDishes] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/api/dishes")
+    fetch(`${import.meta.env.VITE_API_BASE_URL}/api/dishes`)
       .then((res) => res.json())
       .then((data) => setDishes(data))
       .catch((err) => console.error("Failed to load dishes", err));
