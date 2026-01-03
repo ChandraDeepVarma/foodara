@@ -22,6 +22,8 @@ const sequelize = new Sequelize(
   }
 );
 
+export default sequelize;
+
 // import { Sequelize } from "sequelize";
 // import dotenv from "dotenv";
 
