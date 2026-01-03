@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import adminApi from "../../services/adminApi";
 import Swal from "sweetalert2";
-import "./DishesCms.css";
+import "./dishesCms.css";
 
 function DishesCms() {
   const [dishes, setDishes] = useState([]);
