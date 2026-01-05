@@ -18,7 +18,6 @@ export const exportDatabase = async (req, res) => {
       return res.status(400).json({ message: "Password required" });
     }
 
-
     const adminId = req.admin?.id;
     if (!adminId) {
       return res.status(401).json({ message: "Unauthorized" });
@@ -53,6 +52,10 @@ export const exportDatabase = async (req, res) => {
         user: process.env.DB_USER,
         password: process.env.DB_PASSWORD,
         database: process.env.DB_NAME,
+        port: Number(process.env.DB_PORT), // ✅ REQUIRED
+        ssl: {
+          rejectUnauthorized: false, // ✅ REQUIRED FOR RAILWAY
+        },
       },
       dumpToFile: sqlPath,
     });
@@ -78,8 +81,9 @@ export const exportDatabase = async (req, res) => {
     });
 
     await archive.finalize();
-  } catch (err) {
-    console.error("Export error:", err);
+  } 
+  catch (err) {
+    console.error("Export error Full:", err);
     res.status(500).json({ message: "Export failed" });
   }
 };
