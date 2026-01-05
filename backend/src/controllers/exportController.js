@@ -18,10 +18,21 @@ export const exportDatabase = async (req, res) => {
       return res.status(400).json({ message: "Password required" });
     }
 
-    const admin = await Admin.findOne();
+
+    const adminId = req.admin?.id;
+    if (!adminId) {
+      return res.status(401).json({ message: "Unauthorized" });
+    }
+
+    const admin = await Admin.findByPk(adminId);
     if (!admin) {
       return res.status(404).json({ message: "Admin not found" });
     }
+
+    // const admin = await Admin.findOne();
+    // if (!admin) {
+    //   return res.status(404).json({ message: "Admin not found" });
+    // }
 
     const valid = await bcrypt.compare(password, admin.password);
     if (!valid) {
