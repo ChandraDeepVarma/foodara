@@ -10,6 +10,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 export const exportDatabase = async (req, res) => {
+  console.log("EXPORT ROUTE HIT"); //testing purpose
   try {
     const { password } = req.body;
 
