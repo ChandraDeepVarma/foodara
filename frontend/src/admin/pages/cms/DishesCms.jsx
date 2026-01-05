@@ -153,7 +153,7 @@ function DishesCms() {
           <div className="admin-dish-row" key={d.id}>
             <div className="admin-dish-info">
               <img
-                src={`${import.meta.env.VITE_API_BASE_URL}${d.imageUrl}`}
+                src={d.imageUrl}
                 alt={d.name}
                 className="admin-dish-image"
               />

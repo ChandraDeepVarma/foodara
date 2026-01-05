@@ -27,7 +27,7 @@ const DishRow = ({ title, dishes }) => {
           <div className="dish-card" key={dish.id}>
             <div className="dish-image">
               <img
-                src={`${import.meta.env.VITE_API_BASE_URL}${dish.imageUrl}`}
+                src={dish.imageUrl}
                 alt={dish.name}
                 loading="lazy"
               />
