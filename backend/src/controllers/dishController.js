@@ -21,7 +21,9 @@ export const getDishes = async (req, res) => {
 export const createDish = async (req, res) => {
   try {
     const { name, price, category } = req.body;
-    const imageUrl = req.file ? `/uploads/${req.file.filename}` : null;
+    // const imageUrl = req.file ? `/uploads/${req.file.filename}` : null;
+    const imageUrl = req.file ? req.file.path : null;
+
     const dish = await Dish.create({
       name,
       price,

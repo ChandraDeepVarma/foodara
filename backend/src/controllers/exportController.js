@@ -44,7 +44,8 @@ export const exportDatabase = async (req, res) => {
     const zipPath = path.join(tempDir, `db_${timestamp}.zip`);
 
     fs.mkdirSync(tempDir, { recursive: true });
-
+    // 1766560564063-45265130.jpg
+    // 1767605365154-794986674.jpg
     // 1️⃣ Dump database to SQL
     await mysqldump({
       connection: {
